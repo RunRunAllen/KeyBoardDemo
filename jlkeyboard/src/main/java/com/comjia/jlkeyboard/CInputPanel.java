@@ -1,4 +1,4 @@
-package com.comjia.keyboard;
+package com.comjia.jlkeyboard;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -51,7 +51,7 @@ public class CInputPanel extends LinearLayout implements IInputPanel, View.OnCli
     }
 
     private View initView(Context context) {
-        return LayoutInflater.from(context).inflate(R.layout.input_panel, this, true);
+        return LayoutInflater.from(context).inflate(R.layout.xj_input_panel, this, true);
     }
 
     @SuppressLint("ClickableViewAccessibility")

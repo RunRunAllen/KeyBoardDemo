@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout">
+
+    <TextView
+        android:id="@+id/iv_brower"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="26dp"
+        android:layout_marginTop="10dp"
+        android:drawableTop="@drawable/xj_ic_brower"
+        android:drawablePadding="4dp"
+        android:gravity="center"
+        android:text="我的浏览"
+        android:textColor="#8d9799"
+        android:textSize="12sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/iv_wait"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="26dp"
+        android:drawableTop="@drawable/xj_ic_wait"
+        android:drawablePadding="4dp"
+        android:gravity="center"
+        android:text="敬请期待"
+        android:textColor="#8d9799"
+        android:textSize="12sp"
+        app:layout_constraintLeft_toRightOf="@+id/iv_brower"
+        app:layout_constraintTop_toTopOf="@+id/iv_brower" />
+
+</merge>

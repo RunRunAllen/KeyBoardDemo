@@ -6,7 +6,7 @@
     android:background="#fcc"
     tools:parentTag="android.widget.LinearLayout">
 
-    <com.comjia.keyboard.CEditText
+    <com.comjia.jlkeyboard.CEditText
         android:id="@+id/et_content"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -25,6 +25,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:layout_marginRight="12dp"
-        android:src="@mipmap/ic_add_open" />
+        android:src="@drawable/xj_ic_add_open" />
 
 </merge>

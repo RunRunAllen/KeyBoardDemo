@@ -16,6 +16,12 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.comjia.jlkeyboard.CInputPanel;
+import com.comjia.jlkeyboard.CMorePanel;
+import com.comjia.jlkeyboard.DensityUtil;
+import com.comjia.jlkeyboard.ISoftKeyboardStateListener;
+import com.comjia.jlkeyboard.KeyboardHelper;
+
 import java.util.ArrayList;
 
 /**
@@ -39,19 +45,19 @@ public class ChatActivity extends AppCompatActivity {
         for (int i = 0; i < 20; i++) {
             msgList.add(i + "=======aaaa");
         }
-        int height = 0;
-        if (MyApplication.keyboardHeight == 0) {
-            height = DensityUtil.getScreenHeight(this) / 5 * 2;
-        } else {
-            height = MyApplication.keyboardHeight;
-        }
+//        int height = 0;
+//        if (MyApplication.keyboardHeight == 0) {
+//            height = DensityUtil.getScreenHeight(this) / 5 * 2;
+//        } else {
+//            height = MyApplication.keyboardHeight;
+//        }
         builder = new KeyboardHelper.Builder(this);
         builder.bindRootLayout(mRootlayout)
                 .bindRecyclerView(mRecycleView)
                 .bindInputPanel(mInputPanel)
                 .bindMorePanel(mMorePanel)
                 .setScrollBodyLayout(msgList.size() > 15)
-                .setKeyboardHeight(height)
+                .setKeyboardHeight( DensityUtil.getScreenHeight(this) / 5 * 2)
                 .setSoftKeyboardListener(new ISoftKeyboardStateListener() {
                     @Override
                     public void onOpened(int keyboardHeight) {

@@ -1,13 +1,12 @@
-package com.comjia.keyboard;
+package com.comjia.jlkeyboard;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,7 +18,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 public class CMorePanel extends ConstraintLayout implements IPanel {
     private Context mContext;
     private View mMorePanelView;
-    private ImageView mBrower;
+    private TextView mBrower;
 
     public CMorePanel(Context context) {
         this(context, null);
@@ -32,7 +31,7 @@ public class CMorePanel extends ConstraintLayout implements IPanel {
     public CMorePanel(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         mContext = context;
-        mMorePanelView = LayoutInflater.from(context).inflate(R.layout.more_panel, this, true);
+        mMorePanelView = LayoutInflater.from(context).inflate(R.layout.xj_more_panel, this, true);
         initView();
     }
 
@@ -56,8 +55,9 @@ public class CMorePanel extends ConstraintLayout implements IPanel {
 
     @Override
     public int getPanelHeight() {
+        //TODO:
         int height = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 111, mContext.getResources().getDisplayMetrics());
-        Log.i("haha", "====keyHeight===" + MyApplication.keyboardHeight + "=====height===" + height);
-        return MyApplication.keyboardHeight - height;
+//        Log.i("haha", "====keyHeight===" + MyApplication.keyboardHeight + "=====height===" + height);
+        return KeyboardHelper.keyboardHeight - height;
     }
 }

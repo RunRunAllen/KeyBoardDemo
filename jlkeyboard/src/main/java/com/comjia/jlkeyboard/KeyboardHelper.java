@@ -1,4 +1,4 @@
-package com.comjia.keyboard;
+package com.comjia.jlkeyboard;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;

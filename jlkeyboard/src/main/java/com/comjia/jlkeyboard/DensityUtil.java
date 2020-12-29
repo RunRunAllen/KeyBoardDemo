@@ -1,4 +1,4 @@
-package com.comjia.keyboard;
+package com.comjia.jlkeyboard;
 
 import android.content.Context;
 
