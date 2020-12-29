@@ -17,8 +17,7 @@ interface IInputPanel extends IPanel {
     /**
      * 设置布局动画处理监听器
      */
-//    void setOnLayoutAnimatorHandleListener(listener:((panelType:PanelType, lastPanelType:PanelType, fromValue:Float, toValue:Float) ->Unit)?)
-    void setOnLayoutAnimatorHandleListener();
+    void setOnLayoutAnimatorHandleListener(IAnimatorHandleListener listener);
 
     /**
      * 设置输入面板（包括软键盘、表情、更多等）状态改变监听器

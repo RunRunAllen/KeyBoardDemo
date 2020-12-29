@@ -74,14 +74,14 @@ public class SoftKeyboardStateHelper implements ViewTreeObserver.OnGlobalLayoutL
         lastSoftKeyboardHeightInPx = keyboardHeightInPx;
         if (mListeners == null) return;
         for (ISoftKeyboardStateListener mListener : mListeners) {
-            mListener.onSoftKeyboardOpened(keyboardHeightInPx);
+            mListener.onOpened(keyboardHeightInPx);
         }
     }
 
     public void notifyOnSoftKeyboardClosed() {
         if (mListeners == null) return;
         for (ISoftKeyboardStateListener mListener : mListeners) {
-            mListener.onSoftKeyboardClosed();
+            mListener.onClosed();
         }
     }
 

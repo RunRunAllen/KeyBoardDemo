@@ -5,8 +5,14 @@ package com.comjia.keyboard;
  */
 public interface ISoftKeyboardStateListener {
 
-    void onSoftKeyboardOpened(int keyboardHeight);
+    /**
+     * 打开
+     */
+    void onOpened(int keyboardHeight);
 
-    void onSoftKeyboardClosed();
+    /**
+     * 关闭
+     */
+    void onClosed();
 
 }

@@ -14,13 +14,17 @@ import android.widget.PopupWindow;
 /**
  * 透明PopupWindow
  */
-public class KeyboardStatePopupWindow extends PopupWindow implements ViewTreeObserver.OnGlobalLayoutListener, ISoftKeyboardStateListener {
+public class KeyboardStatePopupWindow extends PopupWindow implements ViewTreeObserver.OnGlobalLayoutListener {
 
 
-    private final Rect mRect;
     private int maxHeight = 0;
     private boolean isSoftKeyboardOpened = false;
-    private Context mContext;
+    private final Context mContext;
+    private ISoftKeyboardStateListener mListener;
+
+    public void setSoftKeyboardListener(ISoftKeyboardStateListener mListener) {
+        this.mListener = mListener;
+    }
 
     public KeyboardStatePopupWindow(Context context, View rootView) {
         super(context);
@@ -35,51 +39,43 @@ public class KeyboardStatePopupWindow extends PopupWindow implements ViewTreeObs
         //通过设置透明PopupWindow覆盖，可以动态获取软件盘高度
         setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
         setInputMethodMode(INPUT_METHOD_NEEDED);
-        rootView.getViewTreeObserver().addOnGlobalLayoutListener(this);
-        showAtLocation(rootView, Gravity.NO_GRAVITY, 0, 0);
-        mRect = new Rect();
+        contentView.getViewTreeObserver().addOnGlobalLayoutListener(this);
+        rootView.post(() -> showAtLocation(rootView, Gravity.NO_GRAVITY, 0, 0));
 
     }
 
     @Override
     public void onGlobalLayout() {
+        //TODO:
+        Rect mRect = new Rect();
         getContentView().getWindowVisibleDisplayFrame(mRect);
         if (mRect.bottom > maxHeight) {
             maxHeight = mRect.bottom;
         }
         int screenHeight = DensityUtil.getScreenHeight(mContext);
+        //键盘的高度
         int keyboardHeight = maxHeight - mRect.bottom;
         boolean visible = keyboardHeight > screenHeight / 4;
         if (!isSoftKeyboardOpened && visible) {
-            isSoftKeyboardOpened =true;
+            isSoftKeyboardOpened = true;
+            if (mListener != null) {
+                mListener.onOpened(keyboardHeight);
+                KeyboardHelper.keyboardHeight = keyboardHeight;
+            }
         }
 
-//        contentView.getWindowVisibleDisplayFrame(rect)
-//        if (rect.bottom > maxHeight) {
-//            maxHeight = rect.bottom
-//        }
-//        val screenHeight: Int = DensityUtil.getScreenHeight(context)
-//        //键盘的高度
-//        val keyboardHeight = maxHeight - rect.bottom
-//        val visible = keyboardHeight > screenHeight / 4
-//        if (!isSoftKeyboardOpened && visible) {
-//            isSoftKeyboardOpened = true
-//            onKeyboardStateListener?.onOpened(keyboardHeight)
-//            KeyboardHelper.keyboardHeight = keyboardHeight
-//        } else if (isSoftKeyboardOpened && !visible) {
-//            isSoftKeyboardOpened = false
-//            onKeyboardStateListener?.onClosed()
-//        }
-
+        if (isSoftKeyboardOpened && !visible) {
+            isSoftKeyboardOpened = false;
+            if (mListener != null) {
+                mListener.onClosed();
+            }
+        }
     }
 
-    @Override
-    public void onSoftKeyboardOpened(int keyboardHeight) {
-
-    }
-
-    @Override
-    public void onSoftKeyboardClosed() {
-
+    public void release() {
+        View contentView = getContentView();
+        if (contentView != null) {
+            contentView.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+        }
     }
 }

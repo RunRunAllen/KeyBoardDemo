@@ -13,12 +13,12 @@ enum PanelType {
     /**
      * 面板类型：语音
      */
-    VOICE,
+//    VOICE,
 
     /**
      * 面板类型：表情
      */
-    EXPRESSION,
+//    EXPRESSION,
 
     /**
      * 面板类型：更多

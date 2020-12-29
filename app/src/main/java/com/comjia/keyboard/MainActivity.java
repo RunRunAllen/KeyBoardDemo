@@ -19,13 +19,13 @@ public class MainActivity extends AppCompatActivity {
         SoftKeyboardStateHelper stateHelper = new SoftKeyboardStateHelper(mActivityMain);
         stateHelper.addSoftKeyboardStateListener(new ISoftKeyboardStateListener() {
             @Override
-            public void onSoftKeyboardOpened(int keyboardHeight) {
+            public void onOpened(int keyboardHeight) {
                 MyApplication.keyboardHeight = keyboardHeight;
                 Log.i("haha", "======open=====" + keyboardHeight);
             }
 
             @Override
-            public void onSoftKeyboardClosed() {
+            public void onClosed() {
                 Log.i("haha", "=====close======" + MyApplication.keyboardHeight);
             }
         });
