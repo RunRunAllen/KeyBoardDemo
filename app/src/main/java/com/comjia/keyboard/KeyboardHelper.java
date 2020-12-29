@@ -21,7 +21,6 @@ public class KeyboardHelper {
     private RecyclerView recyclerView;
     private IPanel morePanel;
     private IInputPanel inputPanel;
-    private KeyboardStatePopupWindow keyboardStatePopupWindow;
     private boolean scrollBodyLayout = false;
     private ISoftKeyboardStateListener onKeyboardStateListener;
 
@@ -46,6 +45,7 @@ public class KeyboardHelper {
         private IInputPanel inputPanel;
         private boolean scrollBodyLayout = false;
         private ISoftKeyboardStateListener onKeyboardStateListener;
+        private KeyboardStatePopupWindow keyboardStatePopupWindow;
 
         public Builder(Context mContext) {
             this.mContext = mContext;
@@ -71,9 +71,8 @@ public class KeyboardHelper {
 
         public Builder bindRootLayout(ViewGroup rootLayout) {
             this.rootLayout = rootLayout;
-            KeyboardStatePopupWindow keyboardStatePopupWindow = new KeyboardStatePopupWindow(mContext, rootLayout);
+            keyboardStatePopupWindow = new KeyboardStatePopupWindow(mContext, rootLayout);
             keyboardStatePopupWindow.setSoftKeyboardListener(new ISoftKeyboardStateListener() {
-                //TODO:是否要添加keyboard 监听
                 @Override
                 public void onOpened(int height) {
                     keyboardHeight = height;
@@ -191,26 +190,28 @@ public class KeyboardHelper {
         public KeyboardHelper create() {
             return new KeyboardHelper(this);
         }
+
+        public Builder reset() {
+            if (inputPanel != null) {
+                inputPanel.reset();
+            }
+            if (morePanel != null) {
+                morePanel.reset();
+            }
+            return this;
+        }
+
+        public Builder release() {
+            reset();
+            inputPanel = null;
+            morePanel = null;
+            if (keyboardStatePopupWindow != null) {
+                keyboardStatePopupWindow.release();
+                keyboardStatePopupWindow.dismiss();
+                keyboardStatePopupWindow = null;
+            }
+            return this;
+        }
     }
 
-
-    public void reset() {
-        if (inputPanel != null) {
-            inputPanel.reset();
-        }
-        if (morePanel != null) {
-            morePanel.reset();
-        }
-    }
-
-    public void release() {
-        reset();
-        inputPanel = null;
-        morePanel = null;
-        if (keyboardStatePopupWindow != null) {
-            keyboardStatePopupWindow.release();
-            keyboardStatePopupWindow.dismiss();
-            keyboardStatePopupWindow = null;
-        }
-    }
 }

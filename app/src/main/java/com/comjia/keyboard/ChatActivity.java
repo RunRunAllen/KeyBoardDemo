@@ -24,9 +24,9 @@ import java.util.ArrayList;
 public class ChatActivity extends AppCompatActivity {
 
     private ArrayList<String> msgList = new ArrayList<>();
-    private KeyboardHelper keyboardHelper;
     private MsgListAdapter msgListAdapter;
     private RecyclerView mRecycleView;
+    private KeyboardHelper.Builder builder;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -45,8 +45,8 @@ public class ChatActivity extends AppCompatActivity {
         } else {
             height = MyApplication.keyboardHeight;
         }
-        KeyboardHelper keyboardHelper = new KeyboardHelper.Builder(this)
-                .bindRootLayout(mRootlayout)
+        builder = new KeyboardHelper.Builder(this);
+        builder.bindRootLayout(mRootlayout)
                 .bindRecyclerView(mRecycleView)
                 .bindInputPanel(mInputPanel)
                 .bindMorePanel(mMorePanel)
@@ -57,6 +57,7 @@ public class ChatActivity extends AppCompatActivity {
                     public void onOpened(int keyboardHeight) {
                         MyApplication.keyboardHeight = keyboardHeight;
                     }
+
                     @Override
                     public void onClosed() {
 
@@ -73,7 +74,7 @@ public class ChatActivity extends AppCompatActivity {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_UP) {
-                    keyboardHelper.reset();
+                    builder.reset();
                 }
                 return false;
             }
@@ -114,12 +115,11 @@ public class ChatActivity extends AppCompatActivity {
         }
     }
 
-
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (keyboardHelper != null) {
-            keyboardHelper.release();
+        if (builder != null) {
+            builder.release();
         }
     }
 }

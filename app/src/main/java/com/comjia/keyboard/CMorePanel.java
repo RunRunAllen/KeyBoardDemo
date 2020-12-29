@@ -7,16 +7,16 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 /**
  * 拓展面板
  */
-public class CMorePanel extends FrameLayout implements IPanel {
+public class CMorePanel extends ConstraintLayout implements IPanel {
     private Context mContext;
     private View mMorePanelView;
     private ImageView mBrower;

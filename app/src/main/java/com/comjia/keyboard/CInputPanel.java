@@ -25,10 +25,9 @@ public class CInputPanel extends LinearLayout implements IInputPanel, View.OnCli
     private PanelType panelType = PanelType.NONE;
     private PanelType lastPanelType = PanelType.NONE;
     private boolean isKeyboardOpened = false;
-    private View mInputPanelView;
-    private CEditText mEditText;
-    private ImageView mAddMore;
-    private Context mContext;
+    private final CEditText mEditText;
+    private final ImageView mAddMore;
+    private final Context mContext;
     private OnInputPanelStateChangedListener mOnInputPanelStateChangedListener;
     private IAnimatorHandleListener mOnLayoutAnimatorHandleListener;
     private boolean isActive = false;
@@ -44,7 +43,7 @@ public class CInputPanel extends LinearLayout implements IInputPanel, View.OnCli
     public CInputPanel(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         mContext = context;
-        mInputPanelView = initView(context);
+        View mInputPanelView = initView(context);
         mEditText = mInputPanelView.findViewById(R.id.et_content);
         mAddMore = mInputPanelView.findViewById(R.id.btn_more);
         mEditText.setInputType(InputType.TYPE_NULL);
@@ -73,11 +72,11 @@ public class CInputPanel extends LinearLayout implements IInputPanel, View.OnCli
     @Override
     public boolean onTouch(View v, MotionEvent event) {
         mEditText.setGravity(Gravity.CENTER_VERTICAL);
-        UIUtils.requestFocus(mEditText);
         if (event.getAction() == KeyEvent.ACTION_UP) {
             if (!isKeyboardOpened) {
                 //TODO:
                 //延迟100
+                UIUtils.requestFocus(mEditText);
                 UIUtils.showSoftInput(mContext, mEditText);
             }
             mEditText.resetInputType();
@@ -167,6 +166,8 @@ public class CInputPanel extends LinearLayout implements IInputPanel, View.OnCli
         if (!isActive) {
             return;
         }
+        mEditText.setGravity(Gravity.CENTER);
+        mEditText.setHint("我要发送消息");
         UIUtils.loseFocus(mEditText);
         UIUtils.hideSoftInput(mContext, mEditText);
         postDelayed(() -> handleAnimator(PanelType.NONE), 100);
