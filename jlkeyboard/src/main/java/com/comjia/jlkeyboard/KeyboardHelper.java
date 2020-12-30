@@ -130,7 +130,7 @@ public class KeyboardHelper {
                 ((CInputPanel) inputPanel).callBack = mPanelEventCallBack;
             }
             inputPanelHeight = inputPanel.getPanelHeight();
-            inputPanel.setOnInputStateChangedListener(new OnInputPanelStateChangedListener() {
+            inputPanel.setOnInputStateChangedListener(new IOnInputPanelStateChangedListener() {
 
                 @Override
                 public void onShowInputMethodPanel() {

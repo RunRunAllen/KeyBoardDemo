@@ -3,7 +3,7 @@ package com.comjia.jlkeyboard;
 /**
  *
  */
-interface OnInputPanelStateChangedListener {
+interface IOnInputPanelStateChangedListener {
     /**
      * 显示语音面板
      */

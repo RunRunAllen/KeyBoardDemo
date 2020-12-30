@@ -22,5 +22,5 @@ interface IInputPanel extends IPanel {
     /**
      * 设置输入面板（包括软键盘、表情、更多等）状态改变监听器
      */
-    void setOnInputStateChangedListener(OnInputPanelStateChangedListener listener);
+    void setOnInputStateChangedListener(IOnInputPanelStateChangedListener listener);
 }

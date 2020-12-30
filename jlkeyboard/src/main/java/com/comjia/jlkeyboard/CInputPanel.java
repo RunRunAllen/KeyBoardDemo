@@ -26,7 +26,7 @@ public class CInputPanel extends LinearLayout implements IInputPanel, View.OnCli
     private final ImageView mAddMore;
     private final TextView mHint;
     private final Context mContext;
-    private OnInputPanelStateChangedListener mOnInputPanelStateChangedListener;
+    private IOnInputPanelStateChangedListener mOnInputPanelStateChangedListener;
     private IAnimatorHandleListener mOnLayoutAnimatorHandleListener;
     private boolean isActive = false;
     protected IPanelEventCallBack callBack;
@@ -143,7 +143,7 @@ public class CInputPanel extends LinearLayout implements IInputPanel, View.OnCli
     }
 
     @Override
-    public void setOnInputStateChangedListener(OnInputPanelStateChangedListener listener) {
+    public void setOnInputStateChangedListener(IOnInputPanelStateChangedListener listener) {
         this.mOnInputPanelStateChangedListener = listener;
     }
 
