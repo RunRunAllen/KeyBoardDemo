@@ -42,22 +42,21 @@ public class ChatActivity extends AppCompatActivity {
         mRecycleView = findViewById(R.id.recycler_view);
         CInputPanel mInputPanel = findViewById(R.id.chat_input_panel);
         CMorePanel mMorePanel = findViewById(R.id.more_panel);
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < 10; i++) {
             msgList.add(i + "=======aaaa");
         }
-//        int height = 0;
-//        if (MyApplication.keyboardHeight == 0) {
-//            height = DensityUtil.getScreenHeight(this) / 5 * 2;
-//        } else {
-//            height = MyApplication.keyboardHeight;
-//        }
-        builder = new KeyboardHelper.Builder(this);
+        int height = 0;
+        if (MyApplication.keyboardHeight == 0) {
+            height = DensityUtil.getScreenHeight(this) / 5 * 2;
+        } else {
+            height = MyApplication.keyboardHeight;
+        }
+        builder = new KeyboardHelper.Builder(this, height);
         builder.bindRootLayout(mRootlayout)
                 .bindRecyclerView(mRecycleView)
                 .bindInputPanel(mInputPanel)
                 .bindMorePanel(mMorePanel)
-                .setScrollBodyLayout(msgList.size() > 15)
-                .setKeyboardHeight(DensityUtil.getScreenHeight(this) / 5 * 2)
+                .setScrollBodyLayout(true)
                 .setSoftKeyboardListener(new ISoftKeyboardStateListener() {
                     @Override
                     public void onOpened(int keyboardHeight) {

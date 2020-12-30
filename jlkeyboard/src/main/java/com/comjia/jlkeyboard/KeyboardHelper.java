@@ -47,8 +47,12 @@ public class KeyboardHelper {
         private ISoftKeyboardStateListener onKeyboardStateListener;
         private KeyboardStatePopupWindow keyboardStatePopupWindow;
 
-        public Builder(Context mContext) {
+        public Builder(Context mContext, int height) {
             this.mContext = mContext;
+            keyboardHeight = height;
+            if (inputPanelHeight == 0) {
+                inputPanelHeight = keyboardHeight;
+            }
         }
 
         public Builder setSoftKeyboardListener(ISoftKeyboardStateListener mListener) {
@@ -56,14 +60,10 @@ public class KeyboardHelper {
             return this;
         }
 
-        public Builder setKeyboardHeight(int height) {
-            keyboardHeight = height;
-            if (inputPanelHeight == 0) {
-                inputPanelHeight = keyboardHeight;
-            }
-            return this;
-        }
-
+        /**
+         * 当RecycleView 为 matchParent 时，一定是 true
+         * 否则需要计算高度
+         */
         public Builder setScrollBodyLayout(boolean scrollBodyLayout) {
             this.scrollBodyLayout = scrollBodyLayout;
             return this;
@@ -108,6 +108,7 @@ public class KeyboardHelper {
 
         public Builder bindMorePanel(IPanel morePanel) {
             this.morePanel = morePanel;
+            morePanelHeight = morePanel.getPanelHeight();
             return this;
         }
 
@@ -153,7 +154,7 @@ public class KeyboardHelper {
                     }
 
                     AnimatorSet animatorSet = new AnimatorSet();
-                    animatorSet.setDuration(250);
+                    animatorSet.setDuration(300);
                     animatorSet.setInterpolator(new DecelerateInterpolator());
                     if (panelTranslationYAnimator == null) {
                         if (scrollBodyLayout) {

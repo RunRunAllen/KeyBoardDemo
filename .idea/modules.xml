@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/jlkeyboard/KeyBoardDemo.Keyboard.jlkeyboard.iml" filepath="$PROJECT_DIR$/.idea/modules/jlkeyboard/KeyBoardDemo.Keyboard.jlkeyboard.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/Keyboard.iml" filepath="$PROJECT_DIR$/.idea/modules/Keyboard.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/Keyboard.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/Keyboard.app.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/jlkeyboard/Keyboard.jlkeyboard.iml" filepath="$PROJECT_DIR$/.idea/modules/jlkeyboard/Keyboard.jlkeyboard.iml" />

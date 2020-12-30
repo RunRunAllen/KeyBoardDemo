@@ -71,9 +71,8 @@ public class CMorePanel extends ConstraintLayout implements IPanel, View.OnClick
 
     @Override
     public int getPanelHeight() {
-        //TODO:
+        //TODO: 暂时写死高度
         int height = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 111, mContext.getResources().getDisplayMetrics());
-//        Log.i("haha", "====keyHeight===" + MyApplication.keyboardHeight + "=====height===" + height);
         return KeyboardHelper.keyboardHeight - height;
     }
 }
