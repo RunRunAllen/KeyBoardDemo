@@ -22,7 +22,9 @@ public class KeyboardHelper {
     private IPanel morePanel;
     private IInputPanel inputPanel;
     private boolean scrollBodyLayout = false;
-    private ISoftKeyboardStateListener onKeyboardStateListener;
+    private ISoftKeyboardStateListener mOnKeyboardStateListener;
+    private IPanelEventCallBack mPanelEventCallBack;
+
 
     public static int keyboardHeight = 0;
     public static int inputPanelHeight = 0;
@@ -33,7 +35,8 @@ public class KeyboardHelper {
         this.recyclerView = builder.recyclerView;
         this.morePanel = builder.morePanel;
         this.inputPanel = builder.inputPanel;
-        this.onKeyboardStateListener = builder.onKeyboardStateListener;
+        this.mOnKeyboardStateListener = builder.mOnKeyboardStateListener;
+        this.mPanelEventCallBack = builder.mPanelEventCallBack;
         this.scrollBodyLayout = builder.scrollBodyLayout;
     }
 
@@ -44,8 +47,9 @@ public class KeyboardHelper {
         private IPanel morePanel;
         private IInputPanel inputPanel;
         private boolean scrollBodyLayout = false;
-        private ISoftKeyboardStateListener onKeyboardStateListener;
+        private ISoftKeyboardStateListener mOnKeyboardStateListener;
         private KeyboardStatePopupWindow keyboardStatePopupWindow;
+        private IPanelEventCallBack mPanelEventCallBack;
 
         public Builder(Context mContext, int height) {
             this.mContext = mContext;
@@ -55,8 +59,13 @@ public class KeyboardHelper {
             }
         }
 
+        public Builder setPanelEventCallBack(IPanelEventCallBack mPanelEventCallBack) {
+            this.mPanelEventCallBack = mPanelEventCallBack;
+            return this;
+        }
+
         public Builder setSoftKeyboardListener(ISoftKeyboardStateListener mListener) {
-            this.onKeyboardStateListener = mListener;
+            this.mOnKeyboardStateListener = mListener;
             return this;
         }
 
@@ -78,8 +87,8 @@ public class KeyboardHelper {
                     keyboardHeight = height;
                     if (inputPanel != null) {
                         inputPanel.onSoftKeyboardOpened();
-                        if (onKeyboardStateListener != null) {
-                            onKeyboardStateListener.onOpened(keyboardHeight);
+                        if (mOnKeyboardStateListener != null) {
+                            mOnKeyboardStateListener.onOpened(keyboardHeight);
                         }
                         inputPanelHeight = inputPanel.getPanelHeight();
                     }
@@ -92,8 +101,8 @@ public class KeyboardHelper {
                 public void onClosed() {
                     if (inputPanel != null) {
                         inputPanel.onSoftKeyboardClosed();
-                        if (onKeyboardStateListener != null) {
-                            onKeyboardStateListener.onClosed();
+                        if (mOnKeyboardStateListener != null) {
+                            mOnKeyboardStateListener.onClosed();
                         }
                     }
                 }
@@ -108,12 +117,18 @@ public class KeyboardHelper {
 
         public Builder bindMorePanel(IPanel morePanel) {
             this.morePanel = morePanel;
+            if (morePanel instanceof CMorePanel) {
+                ((CMorePanel) morePanel).callBack = mPanelEventCallBack;
+            }
             morePanelHeight = morePanel.getPanelHeight();
             return this;
         }
 
         public Builder bindInputPanel(IInputPanel inputPanel) {
             this.inputPanel = inputPanel;
+            if (inputPanel instanceof CInputPanel) {
+                ((CInputPanel) inputPanel).callBack = mPanelEventCallBack;
+            }
             inputPanelHeight = inputPanel.getPanelHeight();
             inputPanel.setOnInputStateChangedListener(new OnInputPanelStateChangedListener() {
 

@@ -11,7 +11,6 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
@@ -30,6 +29,7 @@ public class CInputPanel extends LinearLayout implements IInputPanel, View.OnCli
     private OnInputPanelStateChangedListener mOnInputPanelStateChangedListener;
     private IAnimatorHandleListener mOnLayoutAnimatorHandleListener;
     private boolean isActive = false;
+    protected IPanelEventCallBack callBack;
 
     public CInputPanel(Context context) {
         this(context, null);
@@ -169,6 +169,9 @@ public class CInputPanel extends LinearLayout implements IInputPanel, View.OnCli
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.btn_more) {
+            if (callBack != null) {
+                callBack.addMoreMsg();
+            }
             if (lastPanelType == PanelType.MORE) {
                 UIUtils.requestFocus(mEditText);
                 UIUtils.showSoftInput(mContext, mEditText);
@@ -188,7 +191,9 @@ public class CInputPanel extends LinearLayout implements IInputPanel, View.OnCli
     @Override
     public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
         if (actionId == EditorInfo.IME_ACTION_SEND) {
-            Toast.makeText(mContext, "发送", Toast.LENGTH_SHORT).show();
+            if (callBack != null) {
+                callBack.sendContentMsg(v.getText().toString());
+            }
             return true;
         }
         return false;

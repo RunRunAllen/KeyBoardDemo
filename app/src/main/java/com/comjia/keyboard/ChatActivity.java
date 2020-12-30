@@ -51,8 +51,11 @@ public class ChatActivity extends AppCompatActivity {
         } else {
             height = MyApplication.keyboardHeight;
         }
+
+        PanelEventCallBack callBack = new PanelEventCallBack();
         builder = new KeyboardHelper.Builder(this, height);
-        builder.bindRootLayout(mRootlayout)
+        builder.setPanelEventCallBack(callBack)
+                .bindRootLayout(mRootlayout)
                 .bindRecyclerView(mRecycleView)
                 .bindInputPanel(mInputPanel)
                 .bindMorePanel(mMorePanel)
