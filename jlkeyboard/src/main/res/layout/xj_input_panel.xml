@@ -3,28 +3,44 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#fcc"
     tools:parentTag="android.widget.LinearLayout">
 
-    <com.comjia.jlkeyboard.CEditText
-        android:id="@+id/et_content"
+    <FrameLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="12dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="12dp"
-        android:layout_marginBottom="10dp"
         android:layout_weight="1"
         android:clickable="false"
-        android:focusable="false"
-        android:hint="我要发送消息" />
+        android:focusable="false">
+
+        <com.comjia.jlkeyboard.CEditText
+            android:id="@+id/et_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="12dp"
+            android:layout_marginBottom="10dp" />
+
+        <TextView
+            android:id="@+id/tv_hint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="12dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="12dp"
+            android:layout_marginBottom="10dp"
+            android:text="@string/xj_hint_text"
+            android:textColor="#C4CBCC" />
+    </FrameLayout>
 
     <ImageView
         android:id="@+id/btn_more"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:layout_gravity="bottom"
         android:layout_marginRight="12dp"
+        android:layout_marginBottom="10dp"
         android:src="@drawable/xj_ic_add_open" />
 
 </merge>

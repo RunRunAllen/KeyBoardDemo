@@ -2,9 +2,7 @@ package com.comjia.jlkeyboard;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.text.InputType;
 import android.util.AttributeSet;
-import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -20,13 +18,14 @@ import androidx.annotation.Nullable;
 /**
  * 输入面板
  */
-public class CInputPanel extends LinearLayout implements IInputPanel, View.OnClickListener, View.OnFocusChangeListener
+public class CInputPanel extends LinearLayout implements IInputPanel, View.OnClickListener
         , View.OnTouchListener, TextView.OnEditorActionListener {
     private PanelType panelType = PanelType.NONE;
     private PanelType lastPanelType = PanelType.NONE;
     private boolean isKeyboardOpened = false;
     private final CEditText mEditText;
     private final ImageView mAddMore;
+    private final TextView mHint;
     private final Context mContext;
     private OnInputPanelStateChangedListener mOnInputPanelStateChangedListener;
     private IAnimatorHandleListener mOnLayoutAnimatorHandleListener;
@@ -46,7 +45,7 @@ public class CInputPanel extends LinearLayout implements IInputPanel, View.OnCli
         View mInputPanelView = initView(context);
         mEditText = mInputPanelView.findViewById(R.id.et_content);
         mAddMore = mInputPanelView.findViewById(R.id.btn_more);
-        mEditText.setInputType(InputType.TYPE_NULL);
+        mHint = mInputPanelView.findViewById(R.id.tv_hint);
         initListener();
     }
 
@@ -56,33 +55,23 @@ public class CInputPanel extends LinearLayout implements IInputPanel, View.OnCli
 
     @SuppressLint("ClickableViewAccessibility")
     private void initListener() {
-        mEditText.setOnFocusChangeListener(this);
         mEditText.setOnTouchListener(this);
         mEditText.setOnEditorActionListener(this);
         mAddMore.setOnClickListener(this);
     }
 
     @Override
-    public void onFocusChange(View v, boolean hasFocus) {
-        if (hasFocus) {
-            mEditText.setHint("");
-        }
-    }
-
-    @Override
     public boolean onTouch(View v, MotionEvent event) {
-        mEditText.setGravity(Gravity.CENTER_VERTICAL);
         if (event.getAction() == KeyEvent.ACTION_UP) {
             if (!isKeyboardOpened) {
-                //TODO:
-                //延迟100
+                mHint.setVisibility(View.GONE);
                 UIUtils.requestFocus(mEditText);
                 UIUtils.showSoftInput(mContext, mEditText);
-            }
-            mEditText.resetInputType();
-            handleAnimator(PanelType.INPUT_MOTHOD);
-            if (mOnInputPanelStateChangedListener != null) {
-                mOnInputPanelStateChangedListener.onShowInputMethodPanel();
+                mEditText.resetInputType();
+                handleAnimator(PanelType.INPUT_MOTHOD);
+                if (mOnInputPanelStateChangedListener != null) {
+                    mOnInputPanelStateChangedListener.onShowInputMethodPanel();
+                }
             }
             return true;
         }
@@ -143,10 +132,7 @@ public class CInputPanel extends LinearLayout implements IInputPanel, View.OnCli
     @Override
     public void onSoftKeyboardClosed() {
         isKeyboardOpened = false;
-        mEditText.setInputType(InputType.TYPE_NULL);
         if (lastPanelType == PanelType.INPUT_MOTHOD) {
-            UIUtils.loseFocus(mEditText);
-            UIUtils.hideSoftInput(mContext, mEditText);
             handleAnimator(PanelType.NONE);
         }
     }
@@ -166,8 +152,9 @@ public class CInputPanel extends LinearLayout implements IInputPanel, View.OnCli
         if (!isActive) {
             return;
         }
-        mEditText.setGravity(Gravity.CENTER);
-        mEditText.setHint("我要发送消息");
+        if (mEditText.getText().length() <= 0) {
+            mHint.setVisibility(View.VISIBLE);
+        }
         UIUtils.loseFocus(mEditText);
         UIUtils.hideSoftInput(mContext, mEditText);
         postDelayed(() -> handleAnimator(PanelType.NONE), 100);

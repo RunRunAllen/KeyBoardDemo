@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -15,10 +16,11 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 /**
  * 拓展面板
  */
-public class CMorePanel extends ConstraintLayout implements IPanel {
+public class CMorePanel extends ConstraintLayout implements IPanel, View.OnClickListener {
     private Context mContext;
     private View mMorePanelView;
     private TextView mBrower;
+    private TextView mWaitting;
 
     public CMorePanel(Context context) {
         this(context, null);
@@ -36,7 +38,21 @@ public class CMorePanel extends ConstraintLayout implements IPanel {
     }
 
     private void initView() {
-        mBrower = mMorePanelView.findViewById(R.id.iv_brower);
+        mBrower = mMorePanelView.findViewById(R.id.tv_brower);
+        mWaitting = mMorePanelView.findViewById(R.id.tv_wait);
+        mBrower.setOnClickListener(this);
+        mWaitting.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (v.getId() == R.id.tv_brower) {
+            //TODO:
+            Toast.makeText(mContext, "哈哈哈哈哈111", Toast.LENGTH_LONG).show();
+        }
+        if (v.getId() == R.id.tv_wait) {
+            Toast.makeText(mContext, "哈哈哈哈哈222", Toast.LENGTH_LONG).show();
+        }
     }
 
     @Override

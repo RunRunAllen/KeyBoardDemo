@@ -57,7 +57,7 @@ public class ChatActivity extends AppCompatActivity {
                 .bindInputPanel(mInputPanel)
                 .bindMorePanel(mMorePanel)
                 .setScrollBodyLayout(msgList.size() > 15)
-                .setKeyboardHeight( DensityUtil.getScreenHeight(this) / 5 * 2)
+                .setKeyboardHeight(DensityUtil.getScreenHeight(this) / 5 * 2)
                 .setSoftKeyboardListener(new ISoftKeyboardStateListener() {
                     @Override
                     public void onOpened(int keyboardHeight) {

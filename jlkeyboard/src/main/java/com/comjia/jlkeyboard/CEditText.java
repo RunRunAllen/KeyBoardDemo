@@ -45,12 +45,12 @@ public class CEditText extends AppCompatEditText {
         setImeOptions(EditorInfo.IME_ACTION_SEND);
         resetInputType();
         setPadding(mLeftRightPadding, mTopBottomPadding, mLeftRightPadding, mTopBottomPadding);
-        setGravity(Gravity.CENTER);
-        setHintTextColor(Color.parseColor("#C4CBCC"));
+        setGravity(Gravity.CENTER_VERTICAL);
         setTextColor(Color.parseColor("#031A1F"));
         setTextSize(TypedValue.COMPLEX_UNIT_SP, 16f);
         setHorizontallyScrolling(false);
-        setBackgroundResource(R.drawable.shape_common_edittext_bg);
+        setBackgroundResource(R.drawable.xj_shape_common_edittext_bg);
+        setMaxLines(4);
     }
 
     public void resetInputType() {
