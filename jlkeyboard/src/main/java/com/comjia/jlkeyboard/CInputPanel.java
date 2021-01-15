@@ -73,10 +73,10 @@ public class CInputPanel extends LinearLayout implements IInputPanel, View.OnCli
                     mOnInputPanelStateChangedListener.onShowInputMethodPanel();
                 }
             }
-            return true;
         }
         return false;
     }
+
 
     private void handleAnimator(PanelType panelType) {
         if (lastPanelType == panelType) return;
