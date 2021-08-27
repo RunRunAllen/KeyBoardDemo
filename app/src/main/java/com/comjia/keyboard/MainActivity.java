@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Log.i("haha", "=====onClick======" + MyApplication.keyboardHeight);
+                Log.i("haha","测试代码");
                 startActivity(new Intent(MainActivity.this, ChatActivity.class));
             }
         });
