@@ -32,8 +32,8 @@ public class MainActivity extends AppCompatActivity {
         mActivityMain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Log.i("haha", "=====onClick======" + MyApplication.keyboardHeight);
-//                startActivity(new Intent(MainActivity.this, ChatActivity.class));
+                Log.i("haha", "=====onClick======" + MyApplication.keyboardHeight);
+                startActivity(new Intent(MainActivity.this, ChatActivity.class));
             }
         });
 
